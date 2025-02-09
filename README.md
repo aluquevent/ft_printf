@@ -8,7 +8,7 @@
 - [Installation](#-installation)
 - [Usage](#-usage)
 - [Format specifiers](#-format-specifiers)
-- [Flags & behavior](#-flags-&-behavior)
+- [Flags & behavior](#-flags--behavior)
 - [Project structure](#-project-structure)
 
 ## 🚀 Features
