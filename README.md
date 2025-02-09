@@ -9,7 +9,7 @@
 - Manages width and precision correctly
 - Supports variable width and precision with `*`
 - Properly handles `NULL` strings as `(null)`
-- Follows the 42 Norms (max 25 lines per function, no for loops, no ternary operators)
+- Returns the number of printed characters as a value or -1 when it fails.
 
 ## 📄 Allowed Functions
 - `write`
