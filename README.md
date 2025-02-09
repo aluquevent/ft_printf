@@ -121,6 +121,6 @@ gcc main.c libftprintf.a -o test
 ## 📜 License
 This project is open-source and free to use. No restrictions apply!
 
----
 
-[back to top](#ft_prinft)
+
+[back to top](#ft_printf)
