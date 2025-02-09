@@ -61,15 +61,20 @@ ft_printf("%%10s: %10s\n", "Hi"); // Output: "       Hi"
 | `-`  | Left-aligns the output (default is right-aligned) |
 | `0`  | Pads numbers with zeros instead of spaces (ignored if `-` or precision is set) |
 | `+`  | Forces a `+` sign for positive numbers |
-| ` `  | Adds a space before positive numbers (ignored if `+` is used) |
+| ` `(space)  | Adds a space before positive numbers (ignored if `+` is used) |
 | `#`  | Prints `0x` or `0X` for `%x/%X`, forces `0` for `%o` |
-| `value` | An optional decimal digit string (with nonzero first digit) specifying a minimun ==field width==. If the converted value has fewer character than the field width, it will be padded with spaces on the left (or right, if left-adjustment flag is given). Insted of a decimal digit string one may write `*` to specify that the field width is given as an argument. |
-| `.`| An optional **precision**, in the form of a period ('.') followed by an optional decimal digit string. Instead of a decimal string one may write `*` to specify that the precision is given in the next argument, which must be of type *int*. If the precision is given as just `.`, the precision is taken to be zero. |
-### Additional behavior
+| `width` | An optional decimal digit string (with nonzero first digit) specifying a minimun field `width`. If the converted value has fewer character than the field width, it will be padded with spaces on the left (or right, if left-adjustment flag is given). Insted of a decimal digit string one may write `*` to specify that the field width is given as an argument. |
+| `.`| An optional `precision`, in the form of a period ('.') followed by an optional decimal digit string. Instead of a decimal string one may write `*` to specify that the precision is given in the next argument, which must be of type *int*. If the precision is given as just `.`, the precision is taken to be zero. |
+### Additional behavior notes
 | Flag | Notes |
 |------|-------|
-| `.`  | 
-
+| `-`  | Applies to all format specifiers |
+| `0`  | Applies to `%d`, `%i`, `%u`, `%x`, `%X` |
+| `+`  | Applies to `%d`, `%i`. |
+| ` `(space) | Applies to `%d`, `%i`. |
+| `#`  | Applies to `%x`, `%X`. |
+| `width` | Applies to all format specifiers. |
+| `.`  | For **integers** (`%d`, `%i`, `%u`, `%x`, `%X`), it specifies the minimun width and pads with zeros if necessary, but **will not cut the number**. For **strings** (`%s`), limits the **maximun number of characters** to be printed. If the string is longer than the specified precision, it will be truncated to the specified length. | 
 ## 🏗 Project Structure
 ```
 ft_printf/
