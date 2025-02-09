@@ -121,4 +121,4 @@ gcc main.c libftprintf.a -o test
 ## 📜 License
 This project is open-source and free to use. No restrictions apply!
 
- <div align="right">[back to top](#ft_prinft)</div>]
+ <p style="text-align: right;">[back to top](#ft_prinft)</p>
