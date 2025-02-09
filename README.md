@@ -96,12 +96,6 @@ gcc main.c libftprintf.a -o test
 ./test
 ```
 
-## 📌 Norm Compliance
-- ✅ Functions must be **≤ 25 lines**
-- ✅ No `for` loops
-- ✅ No ternary operators (`? :`)
-- ✅ Proper memory management (`free` used correctly)
-
 ## 🏆 Authors
 - **Asier** - [GitHub Profile](https://github.com/aluquevent)
 
