@@ -2,15 +2,16 @@
 
 ## 📌 Overview
 `ft_printf` is a custom implementation of the standard C `printf` function. It replicates its functionality, handling various format specifiers, flags, width, precision, and different data types.
+
 **Table of contents**
-[Features](#features)
-[Allowed funtions](#allowed functions)
-[Installation](#installation)
-[Usage](#usage)
-[Example outputs](#example outputs)
-[Format specifiers](#format specifiers)
-[Flags & behavior](#flags & behavior)
-[Project structure](#project structure)
+- [Features](#features)
+- [Allowed funtions](#allowed-functions)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Example outputs](#example-outputs)
+- [Format specifiers](#format-specifiers)
+- [Flags & behavior](#flags-&-behavior)
+- [Project structure](#project-structure)
 
 ---
 
