@@ -1,30 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_tolower.c                                       :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aluque-v <aluque-v@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/18 16:22:38 by aluque-v          #+#    #+#             */
-/*   Updated: 2025/01/18 16:22:40 by aluque-v         ###   ########.fr       */
+/*   Created: 2025/01/18 16:21:35 by aluque-v          #+#    #+#             */
+/*   Updated: 2025/01/18 16:21:36 by aluque-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
 /*
 *
-*		If c is an uppercase letter, tolower() returns its lowercase
-*		equivalent, if a lowercase representation exists in the current
-*		locale.  Otherwise, it returns c.
+*		The strlen() function calculates the length of the string pointed
+*		to by str, excluding the terminating null byte ('\0').
 *
 */
 
-int	ft_tolower(int c)
+size_t	ft_strlen(const char *str)
 {
-	if (c >= 'A' && c <= 'Z')
-	{
-		return (c + 32);
-	}
-	return (c);
+	size_t	i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
 }

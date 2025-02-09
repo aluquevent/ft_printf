@@ -12,6 +12,7 @@
 //}
 #include <stdarg.h>
 #include <stdio.h>
+#include "ft_printf.h"
 // void functionn(char *str, ...)
 // {
 //     va_list arg;
@@ -33,7 +34,7 @@ int main(void)
 {
     int count;
     char *str = "3333";
-    count = printf("%p", str);
-    printf("\n%d", count);
+    count = ft_printf("%%s: [%s]", str);
+    ft_printf("\n[%010d]\n", count);
     return (0);
 }

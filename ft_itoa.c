@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
+#include "ft_printf.h"
 /*
 *
 *		Allocates with malloc() and returns a string representing
@@ -19,7 +18,7 @@
 *
 */
 
-size_t	ft_get_digits(unsigned int n)
+static size_t	ft_get_digits(unsigned int n)
 {
 	size_t	digits;
 
@@ -34,7 +33,7 @@ size_t	ft_get_digits(unsigned int n)
 	return (digits);
 }
 
-char	*ft_memalloc(size_t len, size_t sign)
+static char	*ft_memalloc(size_t len, size_t sign)
 {
 	if (sign == 0)
 		return ((char *)malloc(sizeof(char) * (len + 1)));
@@ -42,7 +41,7 @@ char	*ft_memalloc(size_t len, size_t sign)
 		return ((char *)malloc(sizeof(char) * (len + 2)));
 }
 
-unsigned int	ft_abs_value(int n)
+static unsigned int	ft_abs_value(int n)
 {
 	if (n < 0)
 		return ((unsigned int)-n);
