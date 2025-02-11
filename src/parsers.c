@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_printf.h"
+#include "../ft_printf.h"
 
 static void parse_flags(char const **fmt, t_format *info)
 {
@@ -90,6 +90,4 @@ void    parse_format(char const **fmt, t_format *info, va_list args)
         info->specifier = **fmt;
         (*fmt)++;
     }
-    else
-        info->specifier = '\0';
 }

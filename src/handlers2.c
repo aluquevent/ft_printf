@@ -1,10 +1,14 @@
-#include "../includes/ft_printf.h"
+#include "../ft_printf.h"
 
-// int handle_char(t_format *info, va_list args)
-// {
-//     char    *str;
-//     return (apply_formatting(str, info));
-// }
+int handle_char(t_format *info, va_list args)
+{
+    char    str[2];
+
+	str[0] = (char)va_arg(args, int);
+	str[1] = '\0';
+    return (apply_formatting(str, info));
+}
+
 int handle_string(t_format *info, va_list args)
 {
     char    *str;
