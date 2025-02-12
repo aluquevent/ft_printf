@@ -1,4 +1,3 @@
-
 //#include <stdio.h>
 //
 //int main(void)
@@ -35,12 +34,13 @@ int main(void)
     int count;
     char *str = "3333";
 	char	c = 0;
-    count = printf("%c", c);
-	printf("%d\n", count);	
-    count = printf("%c", c);
-	printf("%d\n", count);
-	count = ft_printf("%c", c);	
-	ft_printf("%d\n", count);	
+    count = ft_printf("[%#.8X]", 255);
+    count = printf("[%#.8X]", 255);
+	// printf("%d\n", count);	
+ //    count = printf("%c", c);
+	// printf("%d\n", count);
+	// count = ft_printf("%c", c);	
+	// ft_printf("%d\n", count);	
  //    ft_printf("[%+08d]\n", 42);
  //    printf("[%+08d]\n", 42);
  //    

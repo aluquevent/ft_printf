@@ -24,7 +24,7 @@ typedef struct s_format
 	int		zero_pad;  // flag 0
 	int		plus_sign;  // flag +
 	int		space_sign; // flag ' '
-	int		hex_preffix; // flag #
+	int		hex_prefix; // flag #
 	int		width;		// flag {NUM} (* for argument value).
 	int		precision; // flag . -1 default (* for argument value).
 	char	specifier;

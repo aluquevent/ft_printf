@@ -44,13 +44,14 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c ft_printf.h
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	@echo "Removing object files... 🧹"
+	@echo "Removing object files from ft_printf... 🧹"
 	@$(RM) -r $(OBJ_DIR)
-	@echo "Object files removed. ✅"
+	@echo "Object files removed at ft_printf. ✅"
 
 fclean: clean
-	@echo "Removing libraries and executable... 🗑️"
-	@$(RM) $(NAME)
+	@echo "Removing libraries and executable from ft_printf... 🗑️"
+	@$(RM) $(NAME) libft.a
+	@$(MAKE) fclean -C $(LIBFT_DIR)
 	@echo "Cleanup complete. ✅"
 
 re: fclean all

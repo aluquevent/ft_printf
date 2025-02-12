@@ -26,7 +26,7 @@ static void parse_flags(char const **fmt, t_format *info)
         else if (**fmt == ' ')
             info->space_sign = 1;
         else if (**fmt == '#')
-            info->hex_preffix = 1;
+            info->hex_prefix = 1;
         (*fmt)++;
     }
     if (info->left_align == 1)

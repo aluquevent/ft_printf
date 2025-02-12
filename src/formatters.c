@@ -60,17 +60,49 @@ static int	get_precision_len(t_format *info, char *str, int len)
 		return (info->precision);
 	return (len);
 }
+
 static int	get_zero_precision(t_format *info, int len)
 {
 	if (info->precision > len && info->specifier != 's' && info->specifier != 'c')
 		return (len);
 	return (0);
 }
+
 static int	get_padding(t_format *info, int zero_pad, int len, int sign_len)
 {
 	if (info->width > len + zero_pad + sign_len)
 		return (info->width - (len + zero_pad + sign_len));
 	return (0);
+}
+
+static char	*apply_prefix(char *prefix, char *str)
+{
+	char	*new_str;
+
+	new_str = ft_strjoin(prefix, str);
+	if (!new_str)
+		return (NULL);
+	free(str);
+	return (new_str);
+
+
+}
+
+static char *apply_hash(char *str, t_format *info)
+{
+	if (info->hex_prefix && str[0] != 0 && info->specifier == 'x')
+	{
+		str = apply_prefix("0x", str);
+		if (!str)
+			return (0);	
+	}
+	else if (info->hex_prefix && str[0] !=0 && info->specifier == 'X')
+	{
+		str = apply_prefix("0X", str);
+		if (!str)
+			return (0);
+	}
+	return (str);
 }
 
 int apply_formatting(char *str, t_format *info)

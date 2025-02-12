@@ -27,8 +27,8 @@ static int	check_format(char const **fmt, va_list args)
 	   return (handle_char(&info, args));
 	else if (info.specifier == 's')
 		return (handle_string(&info, args));
-	// else if (info.specifier == 'x' || info.specifier == 'X')
-	//	   return (handle_hex(&info, args));
+	else if (info.specifier == 'x' || info.specifier == 'X')
+	   return (handle_hex(&info, args));
 	else if (info.specifier == 'p')
 	   return (handle_pointer(&info, args));
 	else if (info.specifier == '%')
