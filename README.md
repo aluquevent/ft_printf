@@ -86,24 +86,14 @@ ft_printf("%%10s: %10s\n", "Hi"); // Output: "       Hi"
 ## 🏗 Project Structure
 ```
 ft_printf/
-│── ft_printf.c
-│── check_format.c
-│── parse_format.c
-│── parse_flags.c
-│── parse_width.c
-│── parse_precision.c
-│── handlers/
-│   ├── handle_char.c
-│   ├── handle_string.c
-│   ├── handle_integer.c
-│   ├── handle_unsigned.c
-│   ├── handle_hex.c
-│   ├── handle_pointer.c
-│── utils/
-│   ├── ft_itoa_base.c
-│   ├── ft_strlen.c
-│   ├── ft_strdup.c
-│   ├── ft_strncpy.c
+│── libft/
+│── src/
+│   ├── ft_printf.c
+│   ├── formatters.c
+│   ├── formatters2.c
+│   ├── handlers.c
+│   ├── handlers2.c
+│   ├── parsers.c
 │── ft_printf.h
 │── Makefile
 ```
