@@ -75,35 +75,33 @@ static int	get_padding(t_format *info, int zero_pad, int len, int sign_len)
 	return (0);
 }
 
-static char	*apply_prefix(char *prefix, char *str)
-{
-	char	*new_str;
+// static char	*(char *prefix, char *str)
+// {
+// 	char	*new_str;
+//
+// 	new_str = ft_strjoin(prefix, str);
+// 	if (!new_str)
+// 		return (NULL);
+// 	free(str);
+// 	return (new_str);
+// }
 
-	new_str = ft_strjoin(prefix, str);
-	if (!new_str)
-		return (NULL);
-	free(str);
-	return (new_str);
-
-
-}
-
-static char *apply_hash(char *str, t_format *info)
-{
-	if (info->hex_prefix && str[0] != 0 && info->specifier == 'x')
-	{
-		str = apply_prefix("0x", str);
-		if (!str)
-			return (0);	
-	}
-	else if (info->hex_prefix && str[0] !=0 && info->specifier == 'X')
-	{
-		str = apply_prefix("0X", str);
-		if (!str)
-			return (0);
-	}
-	return (str);
-}
+// static char *apply_hash(char *str, t_format *info)
+// {
+// 	if (info->hex_prefix && str[0] != 0 && info->specifier == 'x')
+// 	{
+// 		str = apply_prefix("0x", str);
+// 		if (!str)
+// 			return (0);	
+// 	}
+// 	else if (info->hex_prefix && str[0] !=0 && info->specifier == 'X')
+// 	{
+// 		str = apply_prefix("0X", str);
+// 		if (!str)
+// 			return (0);
+// 	}
+// 	return (str);
+// }
 
 int apply_formatting(char *str, t_format *info)
 {
