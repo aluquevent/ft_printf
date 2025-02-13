@@ -34,10 +34,11 @@ int print_formatted(char *str, t_format *info, int len, t_print_info *p_info)
 {
     int total;
     char pad_char;
+    int	content_len;
 
     total = 0;
     pad_char = get_pad_char(info);
-    
+    content_len = len;
     // Print left padding if not left-aligned and not zero-padded
     if (!info->left_align && pad_char == ' ')
         total += print_padding(' ', p_info->padding);
@@ -47,7 +48,7 @@ int print_formatted(char *str, t_format *info, int len, t_print_info *p_info)
     {
         total += write(1, "-", 1);
         str++;
-        len--;
+        content_len--;
     }
     
     // Print sign for positive numbers if requested
@@ -62,8 +63,8 @@ int print_formatted(char *str, t_format *info, int len, t_print_info *p_info)
     total += print_padding('0', p_info->zero_pad);
     
     // Print the actual content
-    if (len > 0)
-        total += write(1, str, len);
+    if (content_len > 0)
+	total += write(1, str, content_len);
     
     // Print right padding if left-aligned
     if (info->left_align)

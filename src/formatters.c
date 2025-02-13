@@ -28,6 +28,8 @@ static int get_precision_len(t_format *info, char *str, int len)
     // For strings
     if (info->specifier == 's')
     {
+	if (info->precision == 0)
+	    return (0);
         if (info->precision >= 0 && info->precision < len)
             return (info->precision);
         return (len);
@@ -45,7 +47,9 @@ static int get_precision_len(t_format *info, char *str, int len)
 }
 static int get_zero_precision(t_format *info, char *str, int len)
 {
-    if (info->precision > len && info->specifier != 's' && info->specifier != 'c')
+    if (info->specifier == 's' || info->specifier == 'c')
+	return (0);
+    if (info->precision > 0)
     {
         int num_len = len;
         if (str[0] == '-')

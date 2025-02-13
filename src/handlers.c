@@ -70,9 +70,7 @@ int handle_pointer(t_format *info, va_list args)
 
 static char	*get_hex_case(unsigned int num, t_format *info)
 {
-	if (num == 0 && info->precision == 0)
-		return (ft_strdup(""));
-	else if (info->specifier == 'x')
+	if (info->specifier == 'x')
 		return (ft_itoa_base((unsigned long)num, "0123456789abcdef"));
 	return (ft_itoa_base((unsigned long)num, "0123456789ABCDEF"));
 }
@@ -84,18 +82,13 @@ int handle_hex(t_format *info, va_list args)
 	unsigned int	num;
 	
 	num = va_arg(args, unsigned int);
-	total_len = 0;
-	if (info->hex_prefix && num != 0)
-	{
-		if (info->specifier == 'x')
-			total_len += write(1, "0x", 2);
-		if (info->specifier == 'X')
-			total_len += write(1, "0X", 2);
-	}
+	if (num == 0 && info->precision == 0)
+		return (apply_formatting("", info));
+
 	hex_str = get_hex_case(num, info);
 	if (!hex_str)
 		return (0);
-	total_len += apply_formatting(hex_str, info);
+	total_len = apply_formatting(hex_str, info);
 	free(hex_str);
 	return (total_len);
 }
