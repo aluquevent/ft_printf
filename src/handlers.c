@@ -51,24 +51,20 @@ int handle_pointer(t_format *info, va_list args)
 	char			*hex_str;
 	int				total_len;
 	unsigned long	ptr;
+	char			*final_str;
 
 	ptr = (unsigned long)va_arg(args, void *);
-	total_len = 0;
 	if (!ptr)
-	{
-		hex_str = ft_strdup("0x0");
-		if (!hex_str)
-	  		return (0);
-	}
-	else
-	{
-		total_len += write(1, "0x", 2);
-		hex_str = ft_itoa_base(ptr, "0123456789abcdef");
-		if (!hex_str)
-			return (0);
-	}
-	total_len += apply_formatting(hex_str, info);
+	  		return (apply_formatting("0x0", info));
+	hex_str = ft_itoa_base(ptr, "0123456789abcdef");
+	if (!hex_str)
+		return (0);
+	final_str = ft_strjoin("0x", hex_str);
 	free(hex_str);
+	if (!final_str)
+		return (0);
+	total_len = apply_formatting(final_str, info);
+	free(final_str);
 	return (total_len);
 }
 
