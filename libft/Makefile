@@ -25,7 +25,8 @@ SRC_FILES =	ft_atoi.c			ft_memcpy.c \
 			ft_lstlast.c		ft_lstclear.c \
 			ft_lstdelone.c		ft_lstsize.c \
 			ft_lstmap.c			ft_lstiter.c \
-			ft_lstadd_back.c	ft_itoa_base.c
+			ft_lstadd_back.c	ft_itoa_base.c \
+			ft_uitoa.c
 
 # Convertimos las fuentes en objetos
 OBJS = $(patsubst %.c, $(OBJ_DIR)srcs/%.o, $(SRC_FILES))
@@ -42,7 +43,7 @@ NAME = libft.a
 # Rules
 all: $(NAME)
 
-$(NAME): $(OBJS) Makefile
+$(NAME): $(OBJS)
 	@echo "Creating static library $(NAME)... 📚"
 	@$(AR) $(NAME) $(OBJS)
 	@echo "Library $(NAME) created successfully. ✅"
@@ -51,7 +52,7 @@ $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
 	@mkdir -p $(OBJ_DIR)srcs/
 
-$(OBJ_DIR)srcs/%.o: %.c libft.h | $(OBJ_DIR)
+$(OBJ_DIR)srcs/%.o: %.c Makefile libft.h | $(OBJ_DIR)
 	@echo "Compiling $<... 🛠️"
 	@$(CC) $(CFLAGS) -c $< -o $@
 
@@ -68,5 +69,5 @@ fclean: clean
 re: fclean all
 	@echo "Full recompilation complete. 🎉"
 
-.PHONY: all bonus fclean clean re
+.PHONY: all clean fclean test re
 	

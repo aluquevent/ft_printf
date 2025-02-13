@@ -27,16 +27,25 @@ typedef struct s_format
 	int		hex_prefix; // flag #
 	int		width;		// flag {NUM} (* for argument value).
 	int		precision; // flag . -1 default (* for argument value).
-	char	specifier;
+	char		specifier;
 }	t_format;
 
-int		ft_printf(const char *fmt, ...);
+typedef struct s_print_info
+{
+    int sign_len;
+    int padding;
+    int zero_pad;
+}   t_print_info;
+
+int 	ft_printf(const char *fmt, ...);
 void	parse_format(const char **fmt, t_format *info, va_list args);
-int		handle_integer(t_format *info, va_list args);
-int		handle_unsigned(t_format *info, va_list args);
-int		handle_char(t_format *info, va_list args);
-int		handle_string(t_format *info, va_list args);
-int		handle_pointer(t_format *info, va_list args);
-int		handle_hex(t_format *info, va_list args);
-int		apply_formatting(char *str, t_format *info);
+int	handle_integer(t_format *info, va_list args);
+int	handle_unsigned(t_format *info, va_list args);
+int	handle_char(t_format *info, va_list args);
+int	handle_string(t_format *info, va_list args);
+int	handle_pointer(t_format *info, va_list args);
+int	handle_hex(t_format *info, va_list args);
+char	get_pad_char(t_format *info);
+int	apply_formatting(char *str, t_format *info);
+int	print_formatted(char *str, t_format *info, int len, t_print_info *p_info);
 #endif

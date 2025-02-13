@@ -38,7 +38,7 @@ int handle_unsigned(t_format *info, va_list args)
 	n = va_arg(args, unsigned int);
 	if (info->precision == 0 && n == 0)
 		return (apply_formatting("", info));
-	num_str = ft_itoa(n);
+	num_str = ft_uitoa(n);
 	if (!num_str)
 		return (0);
 	total_len = apply_formatting(num_str, info);
@@ -56,7 +56,7 @@ int handle_pointer(t_format *info, va_list args)
 	total_len = 0;
 	if (!ptr)
 	{
-		hex_str = ft_strdup("(nil)");
+		hex_str = ft_strdup("0x0");
 		if (!hex_str)
 	  		return (0);
 	}
@@ -86,10 +86,10 @@ int handle_hex(t_format *info, va_list args)
 	char			*hex_str;
 	int				total_len;
 	unsigned int	num;
-
+	
 	num = va_arg(args, unsigned int);
 	total_len = 0;
-	if (info->hex_prefix)
+	if (info->hex_prefix && num != 0)
 	{
 		if (info->specifier == 'x')
 			total_len += write(1, "0x", 2);

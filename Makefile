@@ -1,13 +1,10 @@
 SRC_DIR = src
-# SRC_DIR = $(shell pwd)/src
-# OBJ_DIR = $(shell pwd)/objs
 OBJ_DIR = objs
 LIBFT_DIR = libft
-# INCLUDES = $(shell pwd)
 
 SRC_FILES = ft_printf.c		formatters.c \
 			handlers.c		handlers2.c \
-			parsers.c
+			parsers.c		printers.c
 
 SRC_FILES := $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 OBJS = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC_FILES))
@@ -20,25 +17,22 @@ RM = rm -f
 LIBFT = $(LIBFT_DIR)/libft.a
 NAME = libftprintf.a
 
-all: $(LIBFT) $(NAME)
+all: $(NAME)
 
 $(LIBFT):
 	@echo "Compiling libft..."
-	@$(MAKE) -C $(LIBFT_DIR)
-	@cp libft/libft.a .
+	@make -C $(LIBFT_DIR)
+	@cp libft/libft.a ./libft.a
 	@echo "libft compiled successfully."
 
-prova:
-	echo $(OBJS)
-
-$(NAME): $(OBJS) Makefile
+$(NAME): $(OBJS) $(LIBFT) Makefile
 	@echo "Creating static library $(NAME)... 📚"
+	@cp $(LIBFT) $(NAME)
 	@$(AR) $(NAME) $(OBJS)
 	@echo "Library $(NAME) created successfully. ✅"
 
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c ft_printf.h 
-# $(OBJ_DIR)/srcs/%.o: $(SRC_DIR)/%.c libftprintf.h | $(OBJ_DIR)
 	@echo "Compiling $<... 🛠️"
 	@mkdir -p $(OBJ_DIR)/srcs/
 	@$(CC) $(CFLAGS) -c $< -o $@
@@ -57,4 +51,4 @@ fclean: clean
 re: fclean all
 	@echo "Full recompilation complete. 🎉"
 
-.PHONY: all bonus fclean clean re prova
+.PHONY: all bonus fclean clean test re
