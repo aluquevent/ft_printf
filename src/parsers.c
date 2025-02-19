@@ -66,9 +66,10 @@ static void parse_precision(char const **fmt, t_format *info, va_list args)
     precision = 0;
     if (**fmt == '*')
     {
-        precision = va_arg(args, int);
         if (precision < 0)
             precision = -1;
+        else
+            precision = va_arg(args, int);
         (*fmt)++;
     }
     while (**fmt >= '0' && **fmt <= '9')
@@ -90,4 +91,6 @@ void    parse_format(char const **fmt, t_format *info, va_list args)
         info->specifier = **fmt;
         (*fmt)++;
     }
+    if ((info->specifier != 's' && info->specifier != 'c') && info->precision >= 0)
+        info->zero_pad = 1;
 }

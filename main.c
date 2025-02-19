@@ -5,9 +5,13 @@
 #include <stdlib.h>
 
 int main(void){
-    ft_printf("%-2p", 15);
+    int res1;
+    int res2;
+    res1 = ft_printf("%d", -5000);
     printf("\n");
-    printf("%-2p", 15);
+    res2 = printf("%d", -5000);
+    printf("\nMy result: %d || Original: %d\n", res1, res2);
+    // ft_printf("%+.9d", -42);
     return 0;
 }
 // void test_basic_conversions(void)
