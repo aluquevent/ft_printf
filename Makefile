@@ -19,7 +19,7 @@ NAME = libftprintf.a
 
 all: $(NAME)
 
-$(LIBFT):
+$(LIBFT): Makefile
 	@echo "Compiling libft..."
 	@make -C $(LIBFT_DIR)
 	@cp libft/libft.a ./libft.a

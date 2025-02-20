@@ -25,7 +25,7 @@ typedef struct s_format
 	int		plus_sign;  // flag +
 	int		space_sign; // flag ' '
 	int		hex_prefix; // flag #
-	int		width;		// flag {NUM} (* for argument value).
+	size_t		width;		// flag {NUM} (* for argument value).
 	int		precision; // flag . -1 default (* for argument value).
 	char		specifier;
 }	t_format;
@@ -47,5 +47,5 @@ int	handle_pointer(t_format *info, va_list args);
 int	handle_hex(t_format *info, va_list args);
 char	get_pad_char(t_format *info);
 int	apply_formatting(char *str, t_format *info);
-int	print_formatted(char *str, t_format *info, int len, t_print_info *p_info);
+int	print_formatted(char *str, t_format *info, size_t new_len, t_print_info *p_info);
 #endif

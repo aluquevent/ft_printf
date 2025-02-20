@@ -22,34 +22,29 @@ static int	print_padding(char pad_char, int padding)
 	return (i);
 }
 
-int print_formatted(char *str, t_format *info, int len, t_print_info *p_info)
+int print_formatted(char *str, t_format *info, size_t new_len, t_print_info *p_info)
 {
     int total;
     char pad_char;
-    int	content_len;
 
     total = 0;
     pad_char = get_pad_char(info);
-    content_len = len;
     if (!info->left_align && pad_char == ' ')
         total += print_padding(' ', p_info->padding);
     if (str[0] == '-')
     {
         total += write(1, "-", 1);
         str++;
-        content_len--;
+		new_len--;
     }
     if (p_info->sign_len)
         total += print_sign(info, p_info->sign_len);
-    if (!info->left_align && pad_char == '0')
+    if (!info->left_align && pad_char == '0' && info->precision < 0)
         total += print_padding('0', p_info->padding);
     total += print_padding('0', p_info->zero_pad);
-    if (content_len > 0)
-	total += write(1, str, content_len);
+    if (new_len > 0)
+	total += write(1, str, new_len);
     if (info->left_align)
         total += print_padding(' ', p_info->padding);
     return (total);
 }
-
-
-

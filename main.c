@@ -1,207 +1,532 @@
-
 #include "ft_printf.h"
 #include <stdio.h>
 #include <limits.h>
 #include <stdlib.h>
-
+#include <fcntl.h>
 int main(void){
-    int res1;
-    int res2;
-    res1 = ft_printf("%d", -5000);
-    printf("\n");
-    res2 = printf("%d", -5000);
-    printf("\nMy result: %d || Original: %d\n", res1, res2);
-    // ft_printf("%+.9d", -42);
-    return 0;
+    int res1, res2;
+
+    ft_printf("\n=================[ BASIC CONVERSIONS ]=================\n");
+    ft_printf("\n\n+++++++++++++++++[ DECIMALS: %%d ]++++++++++++++++\n\n");
+    
+	ft_printf("### Test case: ft_printf('[This is a number %%d]', 0)\n");
+    ft_printf("--------------------------------------------------\n");
+    ft_printf("▶ My output: ");
+    res1 = ft_printf("[This is a number %d]\n", 0);
+    ft_printf("▶ Printf output: ");
+    res2 = printf("[This is a number %d]\n", 0);
+    ft_printf("▶ Return value:  mine = %d | printf = %d\n\n", res1, res2);
+
+	ft_printf("### Test case: ft_printf('[This is a number %%d]', -1)\n");
+    ft_printf("--------------------------------------------------\n");
+    ft_printf("▶ My output: ");
+    res1 = ft_printf("[This is a number %d]\n", -1);
+    ft_printf("▶ Printf output: ");
+    res2 = printf("[This is a number %d]\n", -1);
+    ft_printf("▶ Return value:  mine = %d | printf = %d\n\n", res1, res2);
+
+	ft_printf("### Test case: ft_printf('[This is a number %%d]', 16)\n");
+    ft_printf("--------------------------------------------------\n");
+    ft_printf("▶ My output: ");
+    res1 = ft_printf("[This is a number %d]\n", 16);
+    ft_printf("▶ Printf output: ");
+    res2 = printf("[This is a number %d]\n", 16);
+    ft_printf("▶ Return value:  mine = %d | printf = %d\n\n", res1, res2);
+
+	ft_printf("### Test case: ft_printf('[This is a number %%d]', INT_MIN)\n");
+    ft_printf("--------------------------------------------------\n");
+    ft_printf("▶ My output: ");
+    res1 = ft_printf("[This is a number %d]\n", INT_MIN);
+    ft_printf("▶ Printf output: ");
+    res2 = printf("[This is a number %d]\n", INT_MIN);
+    ft_printf("▶ Return value:  mine = %d | printf = %d\n\n", res1, res2);
+
+	ft_printf("### Test case: ft_printf('[This is a number %%d]', INT_MAX)\n");
+    ft_printf("--------------------------------------------------\n");
+    ft_printf("▶ My output: ");
+    res1 = ft_printf("[This is a number %d]\n", INT_MAX);
+    ft_printf("▶ Printf output: ");
+    res2 = printf("[This is a number %d]\n", INT_MAX);
+    ft_printf("▶ Return value:  mine = %d | printf = %d\n\n", res1, res2);
+
+	ft_printf("\n\n+++++++++++++++++[ INTEGERS: %%i ]++++++++++++++++\n\n");
+
+	ft_printf("### Test case: ft_printf('[This is a number %%i]', 0)\n");
+    ft_printf("--------------------------------------------------\n");
+    ft_printf("▶ My output: ");
+    res1 = ft_printf("[This is a number %i]\n", 0);
+    ft_printf("▶ Printf output: ");
+    res2 = printf("[This is a number %i]\n", 0);
+    ft_printf("▶ Return value:  mine = %i | printf = %i\n\n", res1, res2);
+
+	ft_printf("### Test case: ft_printf('[This is a number %%i]', -1)\n");
+    ft_printf("--------------------------------------------------\n");
+    ft_printf("▶ My output: ");
+    res1 = ft_printf("[This is a number %i]\n", -1);
+    ft_printf("▶ Printf output: ");
+    res2 = printf("[This is a number %i]\n", -1);
+    ft_printf("▶ Return value:  mine = %i | printf = %i\n\n", res1, res2);
+
+	ft_printf("### Test case: ft_printf('[This is a number %%i]', 16)\n");
+    ft_printf("--------------------------------------------------\n");
+    ft_printf("▶ My output: ");
+    res1 = ft_printf("[This is a number %i]\n", 16);
+    ft_printf("▶ Printf output: ");
+    res2 = printf("[This is a number %i]\n", 16);
+    ft_printf("▶ Return value:  mine = %i | printf = %i\n\n", res1, res2);
+
+	ft_printf("### Test case: ft_printf('[This is a number %%i]', INT_MIN)\n");
+    ft_printf("--------------------------------------------------\n");
+    ft_printf("▶ My output: ");
+    res1 = ft_printf("[This is a number %i]\n", INT_MIN);
+    ft_printf("▶ Printf output: ");
+    res2 = printf("[This is a number %i]\n", INT_MIN);
+    ft_printf("▶ Return value:  mine = %i | printf = %i\n\n", res1, res2);
+
+	ft_printf("### Test case: ft_printf('[This is a number %%i]', INT_MAX)\n");
+    ft_printf("--------------------------------------------------\n");
+    ft_printf("▶ My output: ");
+    res1 = ft_printf("[This is a number %i]\n", INT_MAX);
+    ft_printf("▶ Printf output: ");
+    res2 = printf("[This is a number %i]\n", INT_MAX);
+    ft_printf("▶ Return value:  mine = %i | printf = %i\n\n", res1, res2);
+
+	ft_printf("\n\n+++++++++++++++++[ CHARACTERS: %%c ]++++++++++++++++\n\n");
+  
+	ft_printf("### Test case: ft_printf('[%%c]', '0')\n");
+    ft_printf("--------------------------------------------------\n");
+    ft_printf("▶ My output: ");
+    res1 = ft_printf("[%c]\n", '0');
+    ft_printf("▶ Printf output: ");
+    res2 = printf("[%c]\n", '0');
+    ft_printf("▶ Return value:  mine = %d | printf = %d\n\n", res1, res2);
+
+	ft_printf("### Test case: ft_printf('[%%c]', '0' - 256)\n");
+    ft_printf("--------------------------------------------------\n");
+    ft_printf("▶ My output: ");
+    res1 = ft_printf("[%c]\n", '0' - 256);
+    ft_printf("▶ Printf output: ");
+    res2 = printf("[%c]\n", '0' - 256);
+    ft_printf("▶ Return value:  mine = %d | printf = %d\n\n", res1, res2);
+
+	ft_printf("### Test case: ft_printf('[%%c]', '0' + 256)\n");
+    ft_printf("--------------------------------------------------\n");
+    ft_printf("▶ My output: ");
+    res1 = ft_printf("[%c]\n", '0' + 256);
+    ft_printf("▶ Printf output: ");
+    res2 = printf("[%c]\n", '0' + 256);
+    ft_printf("▶ Return value:  mine = %d | printf = %d\n\n", res1, res2);
+
+	ft_printf("### Test case: ft_printf('[%%c %%c %%c]', '0', 1, '0')\n");
+    ft_printf("--------------------------------------------------\n");
+    ft_printf("▶ My output: ");
+    res1 = ft_printf("[%c %c %c]\n", '0', 1, '0');
+    ft_printf("▶ Printf output: ");
+    res2 = printf("[%c %c %c]\n", '0', 1, '0');
+    ft_printf("▶ Return value:  mine = %d | printf = %d\n\n", res1, res2);
+
+	ft_printf("\n\n+++++++++++++++++[ STRINGS: %%s ]++++++++++++++++\n\n");
+  
+	ft_printf("### Test case: ft_printf('[%%s]', '-')\n");
+    ft_printf("--------------------------------------------------\n");
+    ft_printf("▶ My output: ");
+    res1 = ft_printf("[%s]\n", "-");
+    ft_printf("▶ Printf output: ");
+    res2 = printf("[%s]\n", "-");
+    ft_printf("▶ Return value:  mine = %d | printf = %d\n\n", res1, res2);
+
+	ft_printf("### Test case: ft_printf('[%%s]', '')\n");
+    ft_printf("--------------------------------------------------\n");
+    ft_printf("▶ My output: ");
+    res1 = ft_printf("[%s]\n", "");
+    ft_printf("▶ Printf output: ");
+    res2 = printf("[%s]\n", "");
+    ft_printf("▶ Return value:  mine = %d | printf = %d\n\n", res1, res2);
+	
+	char *s1 = "Mussum Ipsum, cacilds vidis litro abertis. Posuere libero varius. Nullam a nisl ut ante blandit hendrerit. Aenean sit amet nisi. Atirei o pau no gatis, per gatis num morreus.";
+	ft_printf("### Test case: ft_printf([%%s]', s1)\n");
+    ft_printf("--------------------------------------------------\n");
+    ft_printf("▶ My output: ");
+    res1 = ft_printf("[%s]\n", s1);
+    ft_printf("▶ Printf output: ");
+    res2 = printf("[%s]\n", s1);
+    ft_printf("▶ Return value:  mine = %d | printf = %d\n\n", res1, res2);
+
+	ft_printf("### Test case: ft_printf('[%%s]', NULL)\n");
+    ft_printf("--------------------------------------------------\n");
+    ft_printf("▶ My output: ");
+    res1 = ft_printf("[%s]\n", NULL);
+    ft_printf("▶ Printf output: ");
+    res2 = printf("[%s]\n", NULL);
+    ft_printf("▶ Return value:  mine = %d | printf = %d\n\n", res1, res2);
+
+	ft_printf("\n\n+++++++++++++++++[ POINTERS: %%p ]++++++++++++++++\n\n");
+  
+	ft_printf("### Test case: ft_printf('[%%p]', (void*)-1)\n");
+    ft_printf("--------------------------------------------------\n");
+    ft_printf("▶ My output: ");
+    res1 = ft_printf("[%p]\n", (void *)-1);
+    ft_printf("▶ Printf output: ");
+    res2 = printf("[%p]\n", (void*)-1);
+    ft_printf("▶ Return value:  mine = %d | printf = %d\n\n", res1, res2);
+  
+	ft_printf("### Test case: ft_printf('[%%p]', -1)\n");
+    ft_printf("--------------------------------------------------\n");
+    ft_printf("▶ My output: ");
+    res1 = ft_printf("[%p]\n", -1);
+    ft_printf("▶ Printf output: ");
+    res2 = printf("[%p]\n", -1);
+    ft_printf("▶ Return value:  mine = %d | printf = %d\n\n", res1, res2);
+  
+	ft_printf("### Test case: ft_printf('[%%p]', 15)\n");
+    ft_printf("--------------------------------------------------\n");
+    ft_printf("▶ My output: ");
+    res1 = ft_printf("[%p]\n", 15);
+    ft_printf("▶ Printf output: ");
+    res2 = printf("[%p]\n", 15);
+    ft_printf("▶ Return value:  mine = %d | printf = %d\n\n", res1, res2);
+  
+	ft_printf("### Test case: ft_printf('[%%p %%p]', INT_MIN, INT_MAX)\n");
+    ft_printf("--------------------------------------------------\n");
+    ft_printf("▶ My output: ");
+    res1 = ft_printf("[%p %p]\n", INT_MIN, INT_MAX);
+    ft_printf("▶ Printf output: ");
+    res2 = printf("[%p %p]\n", INT_MIN, INT_MAX);
+    ft_printf("▶ Return value:  mine = %d | printf = %d\n\n", res1, res2);
+
+	ft_printf("### Test case: ft_printf('[%%p %%p]', LONG_MIN, LONG_MAX)\n");
+    ft_printf("--------------------------------------------------\n");
+    ft_printf("▶ My output: ");
+    res1 = ft_printf("[%p %p]\n", LONG_MIN, LONG_MAX);
+    ft_printf("▶ Printf output: ");
+    res2 = printf("[%p %p]\n", LONG_MIN, LONG_MAX);
+    ft_printf("▶ Return value:  mine = %d | printf = %d\n\n", res1, res2);
+
+	ft_printf("### Test case: ft_printf('[%%p]', NULL)\n");
+    ft_printf("--------------------------------------------------\n");
+    ft_printf("▶ My output: ");
+    res1 = ft_printf("[%p]\n", NULL);
+    ft_printf("▶ Printf output: ");
+    res2 = printf("[%p]\n", NULL);
+    ft_printf("▶ Return value:  mine = %d | printf = %d\n\n", res1, res2);
+
+	ft_printf("\n\n+++++++++++++++++[ HEXADECIMALS: %%x %%X ]++++++++++++++++\n\n");
+  
+	ft_printf("### Test case: ft_printf('[%%x %%X]', 0, 0)\n");
+    ft_printf("--------------------------------------------------\n");
+    ft_printf("▶ My output: ");
+    res1 = ft_printf("[%x %X]\n", 0, 0);
+    ft_printf("▶ Printf output: ");
+    res2 = printf("[%x %X]\n", 0, 0);
+    ft_printf("▶ Return value:  mine = %d | printf = %d\n\n", res1, res2);
+  
+	ft_printf("### Test case: ft_printf('[%%x %%X]', -1, -1)\n");
+    ft_printf("--------------------------------------------------\n");
+    ft_printf("▶ My output: ");
+    res1 = ft_printf("[%x %X]\n", -1, -1);
+    ft_printf("▶ Printf output: ");
+    res2 = printf("[%x %X]\n", -1, -1);
+    ft_printf("▶ Return value:  mine = %d | printf = %d\n\n", res1, res2);
+  
+	ft_printf("### Test case: ft_printf('[%%x %%X]', 56688, 56688)\n");
+    ft_printf("--------------------------------------------------\n");
+    ft_printf("▶ My output: ");
+    res1 = ft_printf("[%x %X]\n", 56688, 56688);
+    ft_printf("▶ Printf output: ");
+    res2 = printf("[%x %X]\n", 56688, 56688);
+    ft_printf("▶ Return value:  mine = %d | printf = %d\n\n", res1, res2);
+  
+	ft_printf("### Test case: ft_printf('[%%x %%X %%x %%X]', INT_MIN, INT_MIN, INT_MAX, INT_MAX)\n");
+    ft_printf("--------------------------------------------------\n");
+    ft_printf("▶ My output: ");
+    res1 = ft_printf("[%x %X %x %X]\n", INT_MIN, INT_MIN, INT_MAX, INT_MAX);
+    ft_printf("▶ Printf output: ");
+    res2 = printf("[%x %X %x %X]\n", INT_MIN, INT_MIN, INT_MAX, INT_MAX);
+    ft_printf("▶ Return value:  mine = %d | printf = %d\n\n", res1, res2);
+
+	ft_printf("### Test case: ft_printf('[%%x %%X %%x %%X]', LONG_MIN, LONG_MIN, LONG_MAX, LONG_MAX)\n");
+    ft_printf("--------------------------------------------------\n");
+    ft_printf("▶ My output: ");
+    res1 = ft_printf("[%x %X %x %X]\n", LONG_MIN, LONG_MIN, LONG_MAX, LONG_MAX);
+    ft_printf("▶ Printf output: ");
+    res2 = printf("[%x %X %x %X]\n", LONG_MIN, LONG_MIN, LONG_MAX, LONG_MAX);
+    ft_printf("▶ Return value:  mine = %d | printf = %d\n\n", res1, res2);
+
+	ft_printf("### Test case: ft_printf('[%%x %%X]', NULL, NULL)\n");
+    ft_printf("--------------------------------------------------\n");
+    ft_printf("▶ My output: ");
+    res1 = ft_printf("[%x %X]\n", NULL, NULL);
+    ft_printf("▶ Printf output: ");
+    res2 = printf("[%x %X]\n", NULL, NULL);
+    ft_printf("▶ Return value:  mine = %d | printf = %d\n\n", res1, res2);
+
+	ft_printf("\n\n+++++++++++++++++[ PERCENT: %% ]++++++++++++++++\n\n");
+  
+	ft_printf("### Test case: ft_printf('[%%%%]')\n");
+    ft_printf("--------------------------------------------------\n");
+    ft_printf("▶ My output: ");
+    res1 = ft_printf("[%%]\n");
+    ft_printf("▶ Printf output: ");
+    res2 = printf("[%%]\n");
+    ft_printf("▶ Return value:  mine = %d | printf = %d\n\n", res1, res2);
+  
+	ft_printf("### Test case: ft_printf('[%%%% %%%%]')\n");
+    ft_printf("--------------------------------------------------\n");
+    ft_printf("▶ My output: ");
+    res1 = ft_printf("[%% %%]\n");
+    ft_printf("▶ Printf output: ");
+    res2 = printf("[%% %%]\n");
+    ft_printf("▶ Return value:  mine = %d | printf = %d\n\n", res1, res2);
+  
+	ft_printf("### Test case: ft_printf('[%%%%%%%%%%%%]')\n");
+    ft_printf("--------------------------------------------------\n");
+    ft_printf("▶ My output: ");
+    res1 = ft_printf("[%%%%%%]\n");
+    ft_printf("▶ Printf output: ");
+    res2 = printf("[%%%%%%]\n");
+    ft_printf("▶ Return value:  mine = %d | printf = %d\n\n", res1, res2);
+ 
+	ft_printf("\n\n+++++++++++++++++[ MIX ]++++++++++++++++\n\n");
+  
+	ft_printf("### Test case: ft_printf('[%%s %%c %%d %%i %%x %%X %%p %%]', 'Hola', 'a', 42, 24, 255, 255, 15)\n");
+    ft_printf("--------------------------------------------------\n");
+    ft_printf("▶ My output: ");
+    res1 = ft_printf("[%s %c %d %i %x %X %p %%]\n", "Hola", 'a', 42, 24, 255, 255, 15);
+    ft_printf("▶ Printf output: ");
+    res2 = printf("[%s %c %d %i %x %X %p %%]\n", "Hola", 'a', 42, 24, 255, 255, 15);
+    ft_printf("▶ Return value:  mine = %d | printf = %d\n\n", res1, res2);
+ 
+    ft_printf("\n=================[ BONUS PART ]=================\n");
+    ft_printf("\n\n+++++++++++++++++[ FLAG: - ]++++++++++++++++\n\n");
+    
+	char *s2 = "This is a left aligned string.";
+	ft_printf("### Test case: ft_printf('[%%-50s]', s2)\n");
+    ft_printf("--------------------------------------------------\n");
+    ft_printf("▶ My output: ");
+    res1 = ft_printf("[%-50s]\n", s2);
+    ft_printf("▶ Printf output: ");
+    res2 = printf("[%-50s]\n", s2);
+    ft_printf("▶ Return value:  mine = %d | printf = %d\n\n", res1, res2);
+
+	ft_printf("### Test case: ft_printf('[%%-50d]', 42)\n");
+    ft_printf("--------------------------------------------------\n");
+    ft_printf("▶ My output: ");
+    res1 = ft_printf("[%-50d]\n", 42);
+    ft_printf("▶ Printf output: ");
+    res2 = printf("[%-50d]\n", 42);
+    ft_printf("▶ Return value:  mine = %d | printf = %d\n\n", res1, res2);
+
+	ft_printf("### Test case(ignoring '0' flag): ft_printf('[%%-050d]', 42)\n");
+    ft_printf("--------------------------------------------------\n");
+    ft_printf("▶ My output: ");
+    res1 = ft_printf("[%-050d]\n", 42);
+    ft_printf("▶ Printf output: ");
+    res2 = printf("[%-050d]\n", 42);
+    ft_printf("▶ Return value:  mine = %d | printf = %d\n\n", res1, res2);
+
+	ft_printf("\n\n+++++++++++++++++[ FLAG: 0 ]++++++++++++++++\n\n");
+    
+	char *s3 = "This is a 0 padded string.";
+	ft_printf("### Test case(undefined behaviour with strings): ft_printf('[%%050s]', s3)\n");
+    ft_printf("--------------------------------------------------\n");
+    ft_printf("▶ My output: ");
+    res1 = ft_printf("[%050s]\n", s3);
+    ft_printf("▶ Printf output: ");
+    res2 = printf("[%050s]\n", s3);
+    ft_printf("▶ Return value:  mine = %d | printf = %d\n\n", res1, res2);
+
+	ft_printf("### Test case: ft_printf('[%%050d]', 42)\n");
+    ft_printf("--------------------------------------------------\n");
+    ft_printf("▶ My output: ");
+    res1 = ft_printf("[%050d]\n", 42);
+    ft_printf("▶ Printf output: ");
+    res2 = printf("[%050d]\n", 42);
+    ft_printf("▶ Return value:  mine = %d | printf = %d\n\n", res1, res2);
+
+	ft_printf("\n\n+++++++++++++++++[ FLAG: width ]++++++++++++++++\n\n");
+ 
+	char *s4 = "This is a padded string with 50 min len.";
+	ft_printf("### Test case: ft_printf('[%%50s]', s4)\n");
+    ft_printf("--------------------------------------------------\n");
+    ft_printf("▶ My output: ");
+    res1 = ft_printf("[%50s]\n", s4);
+    ft_printf("▶ Printf output: ");
+    res2 = printf("[%50s]\n", s4);
+    ft_printf("▶ Return value:  mine = %d | printf = %d\n\n", res1, res2);
+
+	ft_printf("### Test case: ft_printf('[%%050d]', 42)\n");
+    ft_printf("--------------------------------------------------\n");
+    ft_printf("▶ My output: ");
+    res1 = ft_printf("[%50d]\n", 42);
+    ft_printf("▶ Printf output: ");
+    res2 = printf("[%50d]\n", 42);
+    ft_printf("▶ Return value:  mine = %d | printf = %d\n\n", res1, res2);
+
+	ft_printf("\n\n+++++++++++++++++[ FLAG: + ]++++++++++++++++\n\n");
+
+	char *s5 = "This a string that wants to be a number (?).";
+	ft_printf("### Test case: ft_printf('[%%+s]', s5)\n");
+    ft_printf("--------------------------------------------------\n");
+    ft_printf("▶ My output: ");
+    res1 = ft_printf("[%+s]\n", s5);
+    ft_printf("▶ Printf output: ");
+    res2 = printf("[%+s]\n", s5);
+    ft_printf("▶ Return value:  mine = %d | printf = %d\n\n", res1, res2);
+
+	ft_printf("### Test case: ft_printf('[%%+d]', 42)\n");
+    ft_printf("--------------------------------------------------\n");
+    ft_printf("▶ My output: ");
+    res1 = ft_printf("[%+d]\n", 42);
+    ft_printf("▶ Printf output: ");
+    res2 = printf("[%+d]\n", 42);
+    ft_printf("▶ Return value:  mine = %d | printf = %d\n\n", res1, res2);
+
+	ft_printf("### Test case: ft_printf('[%%+d]', -42)\n");
+    ft_printf("--------------------------------------------------\n");
+    ft_printf("▶ My output: ");
+    res1 = ft_printf("[%+d]\n", -42);
+    ft_printf("▶ Printf output: ");
+    res2 = printf("[%+d]\n", -42);
+    ft_printf("▶ Return value:  mine = %d | printf = %d\n\n", res1, res2);
+
+	ft_printf("\n\n+++++++++++++++++[ FLAG: ' ' ]++++++++++++++++\n\n");
+    
+	ft_printf("### Test case: ft_printf('[%% d]', 42)\n");
+    ft_printf("--------------------------------------------------\n");
+    ft_printf("▶ My output: ");
+    res1 = ft_printf("[% d]\n", 42);
+    ft_printf("▶ Printf output: ");
+    res2 = printf("[% d]\n", 42);
+    ft_printf("▶ Return value:  mine = %d | printf = %d\n\n", res1, res2);
+
+	ft_printf("### Test case: ft_printf('[%% d]', -42)\n");
+    ft_printf("--------------------------------------------------\n");
+    ft_printf("▶ My output: ");
+    res1 = ft_printf("[% d]\n", -42);
+    ft_printf("▶ Printf output: ");
+    res2 = printf("[% d]\n", -42);
+    ft_printf("▶ Return value:  mine = %d | printf = %d\n\n", res1, res2);
+
+	ft_printf("### Test case: ft_printf('[%% x]', 42)\n");
+    ft_printf("--------------------------------------------------\n");
+    ft_printf("▶ My output: ");
+    res1 = ft_printf("[% x]\n", 42);
+    ft_printf("▶ Printf output: ");
+    res2 = printf("[% x]\n", 42);
+    ft_printf("▶ Return value:  mine = %d | printf = %d\n\n", res1, res2);
+
+	ft_printf("\n\n+++++++++++++++++[ FLAG: # ]++++++++++++++++\n\n");
+    
+	char *s6 = "This a string that wants to be a cool number (?).";
+	ft_printf("### Test case: ft_printf('[%%#s]', s6)\n");
+    ft_printf("--------------------------------------------------\n");
+    ft_printf("▶ My output: ");
+    res1 = ft_printf("[%#s]\n", s6);
+    ft_printf("▶ Printf output: ");
+    res2 = printf("[%#s]\n", s6);
+    ft_printf("▶ Return value:  mine = %d | printf = %d\n\n", res1, res2);
+
+	ft_printf("### Test case: ft_printf('[%%#x]', 42)\n");
+    ft_printf("--------------------------------------------------\n");
+    ft_printf("▶ My output: ");
+    res1 = ft_printf("[%#x]\n", 42);
+    ft_printf("▶ Printf output: ");
+    res2 = printf("[%#X]\n", 42);
+    ft_printf("▶ Return value:  mine = %d | printf = %d\n\n", res1, res2);
+
+	ft_printf("### Test case: ft_printf('[%%#X]', -42)\n");
+    ft_printf("--------------------------------------------------\n");
+    ft_printf("▶ My output: ");
+    res1 = ft_printf("[%+d]\n", -42);
+    ft_printf("▶ Printf output: ");
+    res2 = printf("[%+d]\n", -42);
+    ft_printf("▶ Return value:  mine = %d | printf = %d\n\n", res1, res2);
+
+	ft_printf("\n\n+++++++++++++++++[ FLAG: . ]++++++++++++++++\n\n");
+ 
+	ft_printf("### Test case: ft_printf('[%%.s]', 'Hi world!')\n");
+    ft_printf("--------------------------------------------------\n");
+    ft_printf("▶ My output: ");
+    res1 = ft_printf("[%.s]\n", "Hi world!");
+    ft_printf("▶ Printf output: ");
+    res2 = printf("[%.s]\n", "Hi world!");
+    ft_printf("▶ Return value:  mine = %d | printf = %d\n\n", res1, res2);
+
+	ft_printf("### Test case: ft_printf('[%%.2s]', 'Hi world!')\n");
+    ft_printf("--------------------------------------------------\n");
+    ft_printf("▶ My output: ");
+    res1 = ft_printf("[%.2s]\n", "Hi world!");
+    ft_printf("▶ Printf output: ");
+    res2 = printf("[%.2s]\n", "Hi world!");
+    ft_printf("▶ Return value:  mine = %d | printf = %d\n\n", res1, res2);
+
+	ft_printf("### Test case: ft_printf('[%%.2d]', 42)\n");
+    ft_printf("--------------------------------------------------\n");
+    ft_printf("▶ My output: ");
+    res1 = ft_printf("[%.2d]\n", 42);
+    ft_printf("▶ Printf output: ");
+    res2 = printf("[%.2d]\n", 42);
+    ft_printf("▶ Return value:  mine = %d | printf = %d\n\n", res1, res2);
+
+	ft_printf("### Test case: ft_printf('[%%.50d]', -42)\n");
+    ft_printf("--------------------------------------------------\n");
+    ft_printf("▶ My output: ");
+    res1 = ft_printf("[%.50d]\n", -42);
+    ft_printf("▶ Printf output: ");
+    res2 = printf("[%.50d]\n", -42);
+    ft_printf("▶ Return value:  mine = %d | printf = %d\n\n", res1, res2);
+
+
+	ft_printf("\n\n+++++++++++++++++[ MIXED FLAGS ]++++++++++++++++\n\n");
+	
+	ft_printf("### Test case: ft_printf('[%%20.15d]', 42)\n");
+    ft_printf("--------------------------------------------------\n");
+    ft_printf("▶ My output: ");
+    res1 = ft_printf("[%20.15d]\n", 42);
+    ft_printf("▶ Printf output: ");
+    res2 = printf("[%20.15d]\n", 42);
+    ft_printf("▶ Return value:  mine = %d | printf = %d\n\n", res1, res2);
+
+    ft_printf("\n\n=================[ ERROR CASES ]=================\n\n");
+
+
+	ft_printf("### Test case(char after %% is not valid): ft_printf('%%9')\n");
+    ft_printf("--------------------------------------------------\n");
+    ft_printf("\n▶ My output: ");
+    res1 = ft_printf("%9");
+    ft_printf("\n▶ Printf output: ");
+    res2 = printf("%9");
+    ft_printf("\n▶ Return value:  mine = %d | printf = %d\n\n", res1, res2);
+	
+	int stdout_copy = dup(STDOUT_FILENO);
+	ft_printf("### Test case(fd 1 is closed and buffer behaviour is ignored): ft_printf('Hello')\n");
+    ft_printf("--------------------------------------------------\n");
+    ft_printf("\n▶ My output: ");
+	close(STDOUT_FILENO);
+    res1 = ft_printf("\nHola");
+	dup2(stdout_copy, STDOUT_FILENO);
+    ft_printf("\n▶ Printf output:");
+	close(STDOUT_FILENO);
+    res2 = printf("\nHola");
+	dup2(stdout_copy, STDOUT_FILENO);
+	printf("\nReset\n");
+    ft_printf("\n▶ Return value:  mine = %d | printf = %d\n\n", res1, res2);
+	
+	ft_printf("### Test case(%% isolated): ft_printf('[%%]')\n");
+    ft_printf("--------------------------------------------------\n");
+    ft_printf("▶ My output: ");
+    res1 = ft_printf("[%]\n");
+    ft_printf("▶ Printf output: ");
+    res2 = printf("[%]\n");
+    ft_printf("▶ Return value:  mine = %d | printf = %d\n\n", res1, res2);
+
+	ft_printf("### Test case(no arguments): ft_printf('[%%d]')\n");
+    ft_printf("--------------------------------------------------\n");
+    ft_printf("▶ My output: ");
+    res1 = ft_printf("[%d]\n");
+    ft_printf("▶ Printf output: ");
+    res2 = printf("[%d]\n");
+    ft_printf("▶ Return value:  mine = %d | printf = %d\n\n", res1, res2);
+
+	return 0;
 }
-// void test_basic_conversions(void)
-// {
-//     int ret1, ret2;
-//     char *str = "Hello World";
-//     char c = 'X';
-//     void *ptr = (void *)0x12345678;
-//
-//     printf("\n=== BASIC CONVERSIONS TESTS ===\n");
-//
-//     // Test %c
-//     printf("\n--- Testing %%c ---\n");
-//     ret1 = printf("Original: [%c]\n", c);
-//     ret2 = ft_printf("Custom  : [%c]\n", c);
-//     printf("Return values - Original: %d, Custom: %d\n", ret1, ret2);
-//
-//     // Test %s
-//     printf("\n--- Testing %%s ---\n");
-//     ret1 = printf("Original: [%s]\n", str);
-//     ret2 = ft_printf("Custom  : [%s]\n", str);
-//     printf("Return values - Original: %d, Custom: %d\n", ret1, ret2);
-//     
-//     // Test NULL string
-//     ret1 = printf("Original NULL: [%s]\n", (char *)NULL);
-//     ret2 = ft_printf("Custom NULL : [%s]\n", (char *)NULL);
-//     printf("Return values - Original: %d, Custom: %d\n", ret1, ret2);
-//
-//     // Test %p
-//     printf("\n--- Testing %%p ---\n");
-//     ret1 = printf("Original: [%p]\n", ptr);
-//     ret2 = ft_printf("Custom  : [%p]\n", ptr);
-//     printf("Return values - Original: %d, Custom: %d\n", ret1, ret2);
-//     
-//     // Test NULL pointer
-//     ret1 = printf("Original NULL: [%p]\n", NULL);
-//     ret2 = ft_printf("Custom NULL : [%p]\n", NULL);
-//     printf("Return values - Original: %d, Custom: %d\n", ret1, ret2);
-//
-//     // Test %%
-//     printf("\n--- Testing %% ---\n");
-//     ret1 = printf("Original: [%%]\n");
-//     ret2 = ft_printf("Custom  : [%%]\n");
-//     printf("Return values - Original: %d, Custom: %d\n", ret1, ret2);
-// }
-//
-// void test_numbers(void)
-// {
-//     int ret1, ret2;
-//     
-//     printf("\n=== NUMBER CONVERSION TESTS ===\n");
-//
-//     // Test %d and %i
-//     printf("\n--- Testing %%d and %%i ---\n");
-//     int numbers[] = {0, -42, 42, INT_MAX, INT_MIN, 2147483647, -2147483648};
-//     for (size_t i = 0; i < sizeof(numbers)/sizeof(numbers[0]); i++)
-//     {
-//         ret1 = printf("Original %%d: [%d]\n", numbers[i]);
-//         ret2 = ft_printf("Custom   %%d: [%d]\n", numbers[i]);
-//         printf("Return values - Original: %d, Custom: %d\n", ret1, ret2);
-//         
-//         ret1 = printf("Original %%i: [%i]\n", numbers[i]);
-//         ret2 = ft_printf("Custom   %%i: [%i]\n", numbers[i]);
-//         printf("Return values - Original: %d, Custom: %d\n", ret1, ret2);
-//     }
-//
-//     // Test %u
-//     printf("\n--- Testing %%u ---\n");
-//     unsigned int unums[] = {0, 42, UINT_MAX, 4294967295};
-//     for (size_t i = 0; i < sizeof(unums)/sizeof(unums[0]); i++)
-//     {
-//         ret1 = printf("Original: [%u]\n", unums[i]);
-//         ret2 = ft_printf("Custom  : [%u]\n", unums[i]);
-//         printf("Return values - Original: %d, Custom: %d\n", ret1, ret2);
-//     }
-//
-//     // Test %x and %X
-//     printf("\n--- Testing %%x and %%X ---\n");
-//     int hex_nums[] = {0, 42, 255, 4096, INT_MAX, INT_MIN};
-//     for (size_t i = 0; i < sizeof(hex_nums)/sizeof(hex_nums[0]); i++)
-//     {
-//         ret1 = printf("Original %%x: [%x]\n", hex_nums[i]);
-//         ret2 = ft_printf("Custom   %%x: [%x]\n", hex_nums[i]);
-//         printf("Return values - Original: %d, Custom: %d\n", ret1, ret2);
-//         
-//         ret1 = printf("Original %%X: [%X]\n", hex_nums[i]);
-//         ret2 = ft_printf("Custom   %%X: [%X]\n", hex_nums[i]);
-//         printf("Return values - Original: %d, Custom: %d\n", ret1, ret2);
-//     }
-// }
-//
-// void test_bonus_flags(void)
-// {
-//     int ret1, ret2;
-//     
-//     printf("\n=== BONUS FLAGS TESTS ===\n");
-//
-//     // Test width
-//     printf("\n--- Testing Width ---\n");
-//     ret1 = printf("Original: [%10d]\n", 42);
-//     ret2 = ft_printf("Custom  : [%10d]\n", 42);
-//     printf("Return values - Original: %d, Custom: %d\n", ret1, ret2);
-//
-//     // Test precision
-//     printf("\n--- Testing Precision ---\n");
-//     ret1 = printf("Original: [%.5d]\n", 42);
-//     ret2 = ft_printf("Custom  : [%.5d]\n", 42);
-//     printf("Return values - Original: %d, Custom: %d\n", ret1, ret2);
-//
-//     // Test minus flag (left-align)
-//     printf("\n--- Testing Minus Flag ---\n");
-//     ret1 = printf("Original: [%-10d]\n", 42);
-//     ret2 = ft_printf("Custom  : [%-10d]\n", 42);
-//     printf("Return values - Original: %d, Custom: %d\n", ret1, ret2);
-//
-//     // Test zero flag
-//     printf("\n--- Testing Zero Flag ---\n");
-//     ret1 = printf("Original: [%010d]\n", 42);
-//     ret2 = ft_printf("Custom  : [%010d]\n", 42);
-//     printf("Return values - Original: %d, Custom: %d\n", ret1, ret2);
-//
-//     // Test space flag
-//     printf("\n--- Testing Space Flag ---\n");
-//     ret1 = printf("Original: [% d]\n", 42);
-//     ret2 = ft_printf("Custom  : [% d]\n", 42);
-//     printf("Return values - Original: %d, Custom: %d\n", ret1, ret2);
-//
-//     // Test plus flag
-//     printf("\n--- Testing Plus Flag ---\n");
-//     ret1 = printf("Original: [%+d]\n", 42);
-//     ret2 = ft_printf("Custom  : [%+d]\n", 42);
-//     printf("Return values - Original: %d, Custom: %d\n", ret1, ret2);
-//
-//     // Test hash flag
-//     printf("\n--- Testing Hash Flag ---\n");
-//     ret1 = printf("Original: [%#x]\n", 42);
-//     ret2 = ft_printf("Custom  : [%#x]\n", 42);
-//     printf("Return values - Original: %d, Custom: %d\n", ret1, ret2);
-//
-//     // Test combined flags
-//     printf("\n--- Testing Combined Flags ---\n");
-//     ret1 = printf("Original: [%+10.5d]\n", 42);
-//     ret2 = ft_printf("Custom  : [%+10.5d]\n", 42);
-//     printf("Return values - Original: %d, Custom: %d\n", ret1, ret2);
-//     
-//     ret1 = printf("Original: [%-#10x]\n", 42);
-//     ret2 = ft_printf("Custom  : [%-#10x]\n", 42);
-//     printf("Return values - Original: %d, Custom: %d\n", ret1, ret2);
-// }
-//
-// void test_edge_cases(void)
-// {
-//     int ret1, ret2;
-//     
-//     printf("\n=== EDGE CASES TESTS ===\n");
-//
-//     // Empty string
-//     printf("\n--- Testing Empty String ---\n");
-//     ret1 = printf("Original: [%s]\n", "");
-//     ret2 = ft_printf("Custom  : [%s]\n", "");
-//     printf("Return values - Original: %d, Custom: %d\n", ret1, ret2);
-//
-//     // Multiple consecutive %
-//     printf("\n--- Testing Multiple %% ---\n");
-//     ret1 = printf("Original: [%%%%]\n");
-//     ret2 = ft_printf("Custom  : [%%%%]\n");
-//     printf("Return values - Original: %d, Custom: %d\n", ret1, ret2);
-//
-//     // Mixed conversions
-//     printf("\n--- Testing Mixed Conversions ---\n");
-//     ret1 = printf("Original: [%d %s %x %c %%]\n", 42, "test", 255, 'Z');
-//     ret2 = ft_printf("Custom  : [%d %s %x %c %%]\n", 42, "test", 255, 'Z');
-//     printf("Return values - Original: %d, Custom: %d\n", ret1, ret2);
-//
-//     // Zero precision with zero value
-//     printf("\n--- Testing Zero Precision with Zero ---\n");
-//     ret1 = printf("Original: [%.0d]\n", 0);
-//     ret2 = ft_printf("Custom  : [%.0d]\n", 0);
-//     printf("Return values - Original: %d, Custom: %d\n", ret1, ret2);
-// }
-//
-// int main(void)
-// {
-//     printf("=== STARTING FT_PRINTF TESTS ===\n");
-//     
-//     test_basic_conversions();
-//     test_numbers();
-//     test_bonus_flags();
-//     test_edge_cases();
-//     
-//     printf("\n=== TESTS COMPLETED ===\n");
-//     return (0);
-// }

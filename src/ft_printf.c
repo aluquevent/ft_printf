@@ -56,6 +56,11 @@ int	ft_printf(char const *fmt, ...)
 		else
 			res = write(1, fmt++, 1);
 		total += res;
+		if (res == -1)
+		{
+			va_end(args);
+			return(total);
+		}
 	}
 	va_end(args);
 	return (total);

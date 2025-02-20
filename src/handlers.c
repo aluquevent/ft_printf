@@ -55,7 +55,7 @@ int handle_pointer(t_format *info, va_list args)
 
 	ptr = (unsigned long)va_arg(args, void *);
 	if (!ptr)
-	  		return (apply_formatting("0x0", info));
+	  		return (apply_formatting("(nil)", info));
 	hex_str = ft_itoa_base(ptr, "0123456789abcdef");
 	if (!hex_str)
 		return (0);
@@ -68,7 +68,7 @@ int handle_pointer(t_format *info, va_list args)
 	return (total_len);
 }
 
-static char	*get_hex_case(unsigned int num, t_format *info)
+static char	*get_hex_case(unsigned long num, t_format *info)
 {
 	if (info->specifier == 'x')
 		return (ft_itoa_base((unsigned long)num, "0123456789abcdef"));
@@ -79,17 +79,37 @@ int handle_hex(t_format *info, va_list args)
 {
 	char			*hex_str;
 	int				total_len;
-	unsigned int	num;
-	
-	num = va_arg(args, unsigned int);
-	if (num == 0 && info->precision == 0)
-		return (apply_formatting("", info));
+	unsigned long	num;
+	char			*tmp;
 
-	hex_str = get_hex_case(num, info);
+	
+	num = (unsigned long)va_arg(args, unsigned int);
+	if (num == 0)
+	{
+		if (info->precision == 0)
+			return (apply_formatting("", info));
+		info->hex_prefix = 0;
+	}
+
+	tmp = get_hex_case(num, info);
+	if (!tmp)
+		return (0);
+	if (info->hex_prefix && num != 0)
+	{
+		if (info->specifier == 'x')
+			hex_str = ft_strjoin("0x", tmp);
+		else
+			hex_str = ft_strjoin("0X", tmp);
+	}
+	else
+		hex_str = tmp;
 	if (!hex_str)
 		return (0);
 	total_len = apply_formatting(hex_str, info);
+	if (hex_str != tmp)
+		free(tmp);
 	free(hex_str);
+	
 	return (total_len);
 }
 
