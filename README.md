@@ -1,7 +1,7 @@
 # ft_printf
 
 > [!NOTE]
-> This is a Work in Progress project
+> Score: 125/100
 
 ## 📌 Overview
 
