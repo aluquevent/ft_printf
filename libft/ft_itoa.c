@@ -19,7 +19,7 @@
 *
 */
 
-size_t	ft_get_digits(unsigned int n)
+size_t	ft_get_digits(unsigned long n)
 {
 	size_t	digits;
 
@@ -42,7 +42,7 @@ char	*ft_memalloc(size_t len, size_t sign)
 		return ((char *)malloc(sizeof(char) * (len + 2)));
 }
 
-unsigned int	ft_abs_value(int n)
+unsigned int	ft_abs_value(long n)
 {
 	if (n < 0)
 		return ((unsigned int)-n);
@@ -55,12 +55,12 @@ char	*ft_itoa(int n)
 	char			*result;
 	size_t			digits;
 	size_t			sign;
-	unsigned int	abs_n;
+	unsigned long	abs_n;
 
 	sign = 0;
 	if (n < 0)
 		sign = 1;
-	abs_n = ft_abs_value(n);
+	abs_n = ft_abs_value((long)n);
 	digits = ft_get_digits(abs_n);
 	result = ft_memalloc(digits, sign);
 	if (!result)

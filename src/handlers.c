@@ -1,115 +1,90 @@
 /* ************************************************************************** */
-/*																			  */
-/*														  :::	   ::::::::   */
-/*	 handlers.c											:+:		 :+:	:+:   */
-/*													  +:+ +:+		  +:+	  */
-/*	 By: aluque-v <aluque-v@student.42barcelona.co	+#+  +:+	   +#+		  */
-/*												  +#+#+#+#+#+	+#+			  */
-/*	 Created: 2025/02/09 19:02:11 by aluque-v		   #+#	  #+#			  */
-/*	 Updated: 2025/02/09 19:09:13 by aluque-v		  ###	########.fr		  */
-/*																			  */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   handlers.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aluque-v <aluque-v@student.42barcelona.co  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/03 12:26:17 by aluque-v          #+#    #+#             */
+/*   Updated: 2025/03/03 12:28:10 by aluque-v         ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_printf.h"
 
-int handle_integer(t_format *info, va_list args)
+int	handle_char(int arg)
 {
-	char	*num_str;
-	int		total_len;
-	int		n;
+	char	c;
 
-	n = va_arg(args, int);
-	if (info->precision == 0 && n == 0)
-		return (apply_formatting("", info));
-	num_str = ft_itoa(n);
-	if (!num_str)
-		return (0);
-	total_len = apply_formatting(num_str, info);
-	free(num_str);
-	return (total_len);
+	c = arg;
+	return (write(1, &c, 1));
 }
 
-int handle_unsigned(t_format *info, va_list args)
+int	handle_string(char *str)
 {
-	char				*num_str;
-	int					total_len;
-	unsigned int		n;
+	size_t	len;
+	int		result;
 
-	n = va_arg(args, unsigned int);
-	if (info->precision == 0 && n == 0)
-		return (apply_formatting("", info));
-	num_str = ft_uitoa(n);
-	if (!num_str)
-		return (0);
-	total_len = apply_formatting(num_str, info);
-	free(num_str);
-	return (total_len);
+	if (!str)
+		return (write(1, "(null)", 6));
+	len = ft_strlen(str);
+	result = write(1, str, len);
+	return (result);
 }
 
-int handle_pointer(t_format *info, va_list args)
+int	handle_decimal(int n)
 {
-	char			*hex_str;
-	int				total_len;
-	unsigned long	ptr;
-	char			*final_str;
+	char	*str;
+	size_t	len;
+	int		result;
 
-	ptr = (unsigned long)va_arg(args, void *);
-	if (!ptr)
-	  		return (apply_formatting("(nil)", info));
-	hex_str = ft_itoa_base(ptr, "0123456789abcdef");
-	if (!hex_str)
-		return (0);
-	final_str = ft_strjoin("0x", hex_str);
-	free(hex_str);
-	if (!final_str)
-		return (0);
-	total_len = apply_formatting(final_str, info);
-	free(final_str);
-	return (total_len);
+	str = ft_itoa(n);
+	if (!str)
+		return (-1);
+	len = ft_strlen(str);
+	result = write(1, str, len);
+	free(str);
+	return (result);
 }
 
-static char	*get_hex_case(unsigned long num, t_format *info)
+int	handle_pointer(void *ptr)
 {
-	if (info->specifier == 'x')
-		return (ft_itoa_base((unsigned long)num, "0123456789abcdef"));
-	return (ft_itoa_base((unsigned long)num, "0123456789ABCDEF"));
-}
-
-int handle_hex(t_format *info, va_list args)
-{
-	char			*hex_str;
-	int				total_len;
 	unsigned long	num;
+	char			*str;
+	size_t			len;
+	int				result;
 	char			*tmp;
 
-	
-	num = (unsigned long)va_arg(args, unsigned int);
+	num = (unsigned long)ptr;
 	if (num == 0)
-	{
-		if (info->precision == 0)
-			return (apply_formatting("", info));
-		info->hex_prefix = 0;
-	}
-
-	tmp = get_hex_case(num, info);
+		return (write(1, "(nil)", 5));
+	tmp = ft_itoa_base(num, "0123456789abcdef");
 	if (!tmp)
-		return (0);
-	if (info->hex_prefix && num != 0)
-	{
-		if (info->specifier == 'x')
-			hex_str = ft_strjoin("0x", tmp);
-		else
-			hex_str = ft_strjoin("0X", tmp);
-	}
-	else
-		hex_str = tmp;
-	if (!hex_str)
-		return (0);
-	total_len = apply_formatting(hex_str, info);
-	if (hex_str != tmp)
-		free(tmp);
-	free(hex_str);
-	
-	return (total_len);
+		return (-1);
+	str = ft_strjoin("0x", tmp);
+	if (!str)
+		return (-1);
+	free(tmp);
+	len = ft_strlen(str);
+	result = write(1, str, len);
+	free(str);
+	return (result);
 }
 
+int	handle_hex(unsigned int n, bool upper)
+{
+	char	*str;
+	size_t	len;
+	int		result;
+
+	if (upper)
+		str = ft_itoa_base(n, "0123456789ABCDEF");
+	else
+		str = ft_itoa_base(n, "0123456789abcdef");
+	if (!str)
+		return (-1);
+	len = ft_strlen(str);
+	result = write(1, str, len);
+	free(str);
+	return (result);
+}

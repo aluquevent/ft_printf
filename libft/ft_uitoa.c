@@ -1,13 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_uitoa.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aluque-v <aluque-v@student.42barcelona.co  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/03 12:21:15 by aluque-v          #+#    #+#             */
+/*   Updated: 2025/03/03 12:21:25 by aluque-v         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
-char *ft_uitoa(unsigned int n)
+char	*ft_uitoa(unsigned int n)
 {
 	char			*str;
 	int				len;
-	unsigned int	num;
+	unsigned long	num;
 
 	len = 1;
-	num = n;
+	num = (unsigned long)n;
 	while (num / 10)
 	{
 		len++;
